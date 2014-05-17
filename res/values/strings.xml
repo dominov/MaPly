@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MaPly</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="texto_boton_login">Iniciar sesión</string>
+    <string name="title_activity_dieta">Dieta</string>
+    <string name="title_activity_principal_detalles">Detalles</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="olvido_contrasena">Olvido la contraseña ?</string>
+    <string name="nuevo_registro">Nuevo Registro</string>
+    <string name="title_activity_activity_nuevo_alimento">Nuevo Alimento</string>
+
+</resources>
