@@ -11,7 +11,7 @@ import com.dominarte.maply.Modelo.Usuario;
  */
 public class Activity_Principal_detalles extends FragmentActivity {
 
-	public static final String EXTRA_TEXTO = "net.sgoliver.android.fragments.EXTRA_TEXTO";
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

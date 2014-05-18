@@ -188,17 +188,15 @@ public class Dao_dieta extends Dao_general implements Dao {
 
 		} else {
 
-			int cod_u = (Integer) o;
+			String [] datos = (String [])o;
+			
 
 			String url_completa = URL + URL_DIETA + "tipo=1";
 			JSONArray array = null;
 			JSONObject json = null;
 
-			Date date = new Date();
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-					"yyyy-MM-dd");
-			url_completa += "&codigo=" + cod_u + "&fecha="
-					+ simpleDateFormat.format(date);
+			url_completa += "&codigo=" + datos[0] + "&fecha="
+					+ datos[1];
 
 			Log.i(TAG, "Url dieta: " + url_completa);
 

@@ -26,6 +26,13 @@
             android:layout_weight="2" />
 
         <Button
+            android:id="@+id/btn_seleccionar_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Fecha" />
+
+        <Button
             android:id="@+id/btn_actualizar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,8 +47,8 @@
             android:layout_weight="1"
             android:background="@color/Color_Principal" />
     </LinearLayout>
-
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+ 
+    <fragment 
         android:id="@+id/FrgListado"
         class="com.dominarte.maply.Controlador.Fragmento_Lista_Tipos_Comidas"
         android:layout_width="match_parent"

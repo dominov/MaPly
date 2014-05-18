@@ -16,9 +16,9 @@ import android.util.Log;
  * Created by Cristian on 6/04/14.
  */
 public class Dao_general {
-
+	
 	public static String TAG = "Dao_general";
-	public String SERVIDOR = "http://192.168.1.4/";
+	public String SERVIDOR = "http://maply.hol.es/Servicio_MaPly/";
 	public String URL = SERVIDOR + "Servicio_MaPly/servicios/";
 	public String URL_USUARIO = "ServicioUsuario.php?";
 	public String URL_DIETA = "Servicio_dieta.php?";

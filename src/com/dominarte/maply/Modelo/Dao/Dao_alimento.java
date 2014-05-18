@@ -72,10 +72,9 @@ public class Dao_alimento extends Dao_general implements Dao {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				
+
 				try {
-					
+
 					array = json.getJSONArray("alimentos");
 					if (array != null) {
 						ArrayList<String> c = new ArrayList<String>();
@@ -149,6 +148,10 @@ public class Dao_alimento extends Dao_general implements Dao {
 
 						return json.get("error");
 					}
+				} catch (Exception ex) {
+
+				}
+				try {
 					array = json.getJSONArray("alimento");
 
 					if (array != null) {

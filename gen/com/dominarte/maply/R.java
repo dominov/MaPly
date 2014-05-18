@@ -31,41 +31,42 @@ public final class R {
     }
     public static final class id {
         public static final int FrgDetalle=0x7f09000f;
-        public static final int FrgListado=0x7f090013;
-        public static final int action_settings=0x7f090023;
+        public static final int FrgListado=0x7f090014;
+        public static final int action_settings=0x7f090024;
         public static final int btnLogin=0x7f09000d;
-        public static final int btn_actualizar=0x7f090011;
-        public static final int btn_agregar_porcion=0x7f090020;
-        public static final int btn_cancelar=0x7f09001a;
-        public static final int btn_guardar=0x7f090019;
-        public static final int btn_logout=0x7f090012;
-        public static final int btn_nuevo_registro=0x7f090014;
-        public static final int btn_registrar_comida=0x7f090021;
-        public static final int cbox_registrar_todo=0x7f09001c;
+        public static final int btn_actualizar=0x7f090012;
+        public static final int btn_agregar_porcion=0x7f090021;
+        public static final int btn_cancelar=0x7f09001b;
+        public static final int btn_guardar=0x7f09001a;
+        public static final int btn_logout=0x7f090013;
+        public static final int btn_nuevo_registro=0x7f090015;
+        public static final int btn_registrar_comida=0x7f090022;
+        public static final int btn_seleccionar_fecha=0x7f090011;
+        public static final int cbox_registrar_todo=0x7f09001d;
         public static final int cbx_porcion_consumida=0x7f090007;
         public static final int etPassword=0x7f09000c;
         public static final int etUsuario=0x7f09000b;
         public static final int imageView=0x7f09000a;
         public static final int lblListHeader=0x7f090004;
         public static final int lbl_cantidad=0x7f090005;
-        public static final int lbl_hora=0x7f09001e;
+        public static final int lbl_hora=0x7f09001f;
         public static final int lbl_key=0x7f090002;
         public static final int lbl_medida=0x7f090006;
         public static final int lbl_valor=0x7f090003;
-        public static final int lst_exp_porciones=0x7f09001f;
-        public static final int lv_tipos_comida=0x7f090022;
-        public static final int spr_nombres=0x7f090015;
+        public static final int lst_exp_porciones=0x7f090020;
+        public static final int lv_tipos_comida=0x7f090023;
+        public static final int spr_nombres=0x7f090016;
         public static final int textView=0x7f09000e;
-        public static final int textView2=0x7f090018;
+        public static final int textView2=0x7f090019;
         public static final int tvCantidad=0x7f090009;
         public static final int tvComida=0x7f090008;
         public static final int tvTipo=0x7f090000;
         public static final int tv_resumen=0x7f090001;
-        public static final int txt_cantidad=0x7f090016;
-        public static final int txt_comentario=0x7f090017;
-        public static final int txt_fecha=0x7f09001d;
+        public static final int txt_cantidad=0x7f090017;
+        public static final int txt_comentario=0x7f090018;
+        public static final int txt_fecha=0x7f09001e;
         public static final int txt_nombre_completo=0x7f090010;
-        public static final int txt_tipo=0x7f09001b;
+        public static final int txt_tipo=0x7f09001c;
     }
     public static final class layout {
         public static final int item_lista_fragmento_comida=0x7f030000;
@@ -76,8 +77,9 @@ public final class R {
         public static final int vista_activity_principal_detalles=0x7f030005;
         public static final int vista_activity_principal_lista=0x7f030006;
         public static final int vista_dialog_nuevo_alimento=0x7f030007;
-        public static final int vista_fragmento_detalles_comida=0x7f030008;
-        public static final int vista_fragmento_lista_comidas=0x7f030009;
+        public static final int vista_dialog_seleccionar_fecha=0x7f030008;
+        public static final int vista_fragmento_detalles_comida=0x7f030009;
+        public static final int vista_fragmento_lista_comidas=0x7f03000a;
     }
     public static final class menu {
         public static final int activity_login=0x7f080000;

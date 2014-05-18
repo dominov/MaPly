@@ -1,5 +1,8 @@
 package com.dominarte.maply.Controlador;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,9 +26,11 @@ import com.dominarte.maply.Modelo.Dao.Dao_dieta;
  */
 public class Fragmento_Lista_Tipos_Comidas extends Fragment {
 
-	private ListView lista_dieta;
-	private Comida_Listener listener;
-	private ProgressDialog pDialog;
+	private ListView _lista_dieta;
+	private Comida_Listener _listener;
+	private ProgressDialog _pDialog;
+
+	public static int _ano, _mes, _dia;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,75 +46,77 @@ public class Fragmento_Lista_Tipos_Comidas extends Fragment {
 	public void onActivityCreated(Bundle state) {
 		super.onActivityCreated(state);
 		inicio();
-
 		cargar_dietas();
 
 	}
 
 	public void cargar_dietas() {
-		new Async_Cargar_Dietas().execute();
+		new Async_Cargar_Dietas().execute(""
+				+ Usuario.getInstance().getCod_usuario(), _ano + "-" + _mes
+				+ "-" + _dia);
 	}
 
 	// Inicializar Componentes
 	private void inicio() {
-		lista_dieta = (ListView) getView().findViewById(R.id.lv_tipos_comida);
+		_lista_dieta = (ListView) getView().findViewById(R.id.lv_tipos_comida);
 
-		lista_dieta
+		_lista_dieta
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> list, View view,
 							int pos, long id) {
-						if (listener != null) {
-							listener.onCorreoSeleccionado((Comida) lista_dieta
-									.getAdapter().getItem(pos));
+						if (_listener != null) {
+							_listener
+									.onCorreoSeleccionado((Comida) _lista_dieta
+											.getAdapter().getItem(pos));
 						}
 					}
 				});
 
-		pDialog = new ProgressDialog(this.getActivity());
-		pDialog.setMessage("Cargargando dietas....");
-		pDialog.setIndeterminate(false);
-		pDialog.setCancelable(false);
-		pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		pDialog.setMax(100);
+		_pDialog = new ProgressDialog(this.getActivity());
+		_pDialog.setMessage("Cargargando dietas....");
+		_pDialog.setIndeterminate(false);
+		_pDialog.setCancelable(false);
+		_pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		_pDialog.setMax(100);
 
 	}
 
 	public void actualizar_lista_dieta() {
 		Adaptador_dieta adaptador = new Adaptador_dieta(this.getActivity());
-		lista_dieta.setAdapter(adaptador);
+		_lista_dieta.setAdapter(adaptador);
 	}
 
 	public void setComidas_Listener(Comida_Listener listener) {
-		this.listener = listener;
+		this._listener = listener;
 	}
 
 	public interface Comida_Listener {
 		void onCorreoSeleccionado(Comida comida);
 	}
 
-	class Async_Cargar_Dietas extends AsyncTask<Void, Integer, String> {
+	class Async_Cargar_Dietas extends AsyncTask<String, Integer, String> {
 
 		protected void onPreExecute() {
 			// para el progress vista_dialog_nuevo_alimento
-			pDialog.setProgress(0);
-			pDialog.show();
+			_pDialog.setProgress(0);
+			_pDialog.show();
 		}
 
-		protected String doInBackground(Void... params) {
+		protected String doInBackground(String... params) {
 
 			// enviamos y recibimos y analizamos los datos en segundo plano.
 
-			Dao_dieta dao_dieta = new Dao_dieta(pDialog);
-			return (String) dao_dieta.listar(Usuario.getInstance()
-					.getCod_usuario());
+			Dao_dieta dao_dieta = new Dao_dieta(_pDialog);
+
+			return (String) dao_dieta.listar(params);
 
 		}
 
 		protected void onProgressUpdate(Integer... values) {
 			int progreso = values[0].intValue();
 
-			pDialog.setProgress(progreso);
+			_pDialog.setProgress(progreso);
 		}
 
 		/*
@@ -117,13 +124,12 @@ public class Fragmento_Lista_Tipos_Comidas extends Fragment {
 		 * a la sig. activity o mostramos error
 		 */
 		protected void onPostExecute(String result) {
-			pDialog.setProgress(100);
-			pDialog.dismiss();// ocultamos progess vista_dialog_nuevo_alimento.
+			_pDialog.setProgress(100);
+			_pDialog.dismiss();// ocultamos progess vista_dialog_nuevo_alimento.
 
 			actualizar_lista_dieta();
 
-			Herramientas.mostrar_mensaje( result, 
-					getActivity());
+			Herramientas.mostrar_mensaje(result, getActivity());
 
 			Log.i("onPostExecute=", "" + result);
 		}

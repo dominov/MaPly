@@ -1,10 +1,16 @@
 package com.dominarte.maply.Controlador;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import android.app.AlarmManager;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,11 +19,17 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dominarte.maply.Herramientas;
 import com.dominarte.maply.R;
+import com.dominarte.maply.Controlador.Fragmento_Detalles_Comida.Async_Buscar_Alimento;
+import com.dominarte.maply.Controlador.Fragmento_Lista_Tipos_Comidas.Async_Cargar_Dietas;
 import com.dominarte.maply.Modelo.Comida;
 import com.dominarte.maply.Modelo.Usuario;
 
@@ -26,8 +38,11 @@ public class Activity_Principal_Lista extends FragmentActivity {
 	private static final int PERIOD = 2000;
 	private static final String TAG = "Activity_Principal_Lista";
 	TextView _txt_nombre_completo;
-	Button _btn_actualizar, _btn_salir;
+	Button _btn_actualizar, _btn_salir, _btn_select_fecha;
 	private PendingIntent pendingIntent;
+
+	static final int DIALOGO_SELECCIONAR_FECHA = 0;
+
 	/* Metod que se ejecuta cuando se selecciona un correo */
 	/**
 	 * *************************************************************************
@@ -44,32 +59,32 @@ public class Activity_Principal_Lista extends FragmentActivity {
 		inicio();
 		guardar_preferncias();
 
-		//crearAlarmas();
+		// crearAlarmas();
 		Log.i(TAG, "crearAlarma");
 
 	}
 
-	/*private void crearAlarmas() {
-		Log.i(TAG, "crearAlarma");
-
-		Intent myIntent = new Intent(this, Servicio_Alarma.class);
-		pendingIntent = PendingIntent.getService(this, 0, myIntent, 0);
-
-		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(System.currentTimeMillis());
-		calendar.add(Calendar.HOUR_OF_DAY, 22);
-		calendar.add(Calendar.MINUTE, 14);
-		calendar.add(Calendar.SECOND, 0);
-
-		alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-				pendingIntent);
-
-		for (int i = 0; i < Usuario.getInstance().getList_comida().size(); i++) {
-
-		}
-	}*/
+	/*
+	 * private void crearAlarmas() { Log.i(TAG, "crearAlarma");
+	 * 
+	 * Intent myIntent = new Intent(this, Servicio_Alarma.class); pendingIntent
+	 * = PendingIntent.getService(this, 0, myIntent, 0);
+	 * 
+	 * AlarmManager alarmManager = (AlarmManager)
+	 * getSystemService(ALARM_SERVICE);
+	 * 
+	 * Calendar calendar = Calendar.getInstance();
+	 * calendar.setTimeInMillis(System.currentTimeMillis());
+	 * calendar.add(Calendar.HOUR_OF_DAY, 22); calendar.add(Calendar.MINUTE,
+	 * 14); calendar.add(Calendar.SECOND, 0);
+	 * 
+	 * alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+	 * pendingIntent);
+	 * 
+	 * for (int i = 0; i < Usuario.getInstance().getList_comida().size(); i++) {
+	 * 
+	 * } }
+	 */
 
 	private HashMap<String, String> _daotos_login;
 
@@ -108,6 +123,31 @@ public class Activity_Principal_Lista extends FragmentActivity {
 
 	private void inicio() {
 
+		_btn_select_fecha = (Button) findViewById(R.id.btn_seleccionar_fecha);
+		_btn_select_fecha.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showDialog(DIALOGO_SELECCIONAR_FECHA);
+			}
+		});
+
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+		Fragmento_Lista_Tipos_Comidas._ano = Integer.parseInt(simpleDateFormat
+				.format(date));
+
+		simpleDateFormat = new SimpleDateFormat("MM");
+		Fragmento_Lista_Tipos_Comidas._mes = Integer.parseInt(simpleDateFormat
+				.format(date));
+		
+		simpleDateFormat = new SimpleDateFormat("dd");
+		Fragmento_Lista_Tipos_Comidas._dia = Integer.parseInt(simpleDateFormat
+				.format(date));
+		
+		_btn_select_fecha.setText(Fragmento_Lista_Tipos_Comidas._ano + "-"
+				+ Fragmento_Lista_Tipos_Comidas._mes + "-"
+				+ Fragmento_Lista_Tipos_Comidas._dia);
+
 		Fragmento_Lista_Tipos_Comidas frgListado;
 
 		frgListado = (Fragmento_Lista_Tipos_Comidas) getSupportFragmentManager()
@@ -117,7 +157,7 @@ public class Activity_Principal_Lista extends FragmentActivity {
 				.setComidas_Listener(new Fragmento_Lista_Tipos_Comidas.Comida_Listener() {
 					@Override
 					public void onCorreoSeleccionado(Comida comida) {
-						correo_seleccionado(comida);
+						comida_seleccionada(comida);
 					}
 				});
 
@@ -143,7 +183,7 @@ public class Activity_Principal_Lista extends FragmentActivity {
 
 	}
 
-	private void correo_seleccionado(Comida comida) {
+	private void comida_seleccionada(Comida comida) {
 		boolean hayDetalle = (getSupportFragmentManager().findFragmentById(
 				R.id.FrgDetalle) != null);
 
@@ -162,8 +202,39 @@ public class Activity_Principal_Lista extends FragmentActivity {
 	}
 
 	private void evento_btn_actalizar() {
+
 		((Fragmento_Lista_Tipos_Comidas) getSupportFragmentManager()
 				.findFragmentById(R.id.FrgListado)).cargar_dietas();
+		
+		
+
+	}
+
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case DIALOGO_SELECCIONAR_FECHA:
+
+			OnDateSetListener onDateSetListener = new OnDateSetListener() {
+				@Override
+				public void onDateSet(DatePicker view, int year,
+						int monthOfYear, int dayOfMonth) {
+					Fragmento_Lista_Tipos_Comidas._ano = year;
+					Fragmento_Lista_Tipos_Comidas._mes = monthOfYear;
+					Fragmento_Lista_Tipos_Comidas._dia = dayOfMonth;
+					_btn_select_fecha.setText(Fragmento_Lista_Tipos_Comidas._ano + "-"
+							+ Fragmento_Lista_Tipos_Comidas._mes + "-"
+							+ Fragmento_Lista_Tipos_Comidas._dia);
+					evento_btn_actalizar();
+					
+				}
+			};
+
+			return new DatePickerDialog(this, onDateSetListener,
+					Fragmento_Lista_Tipos_Comidas._ano,
+					Fragmento_Lista_Tipos_Comidas._mes,
+					Fragmento_Lista_Tipos_Comidas._dia);
+		}
+		return null;
 	}
 
 	@Override
