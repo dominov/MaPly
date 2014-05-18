@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -86,6 +89,7 @@ public class Fragmento_Detalles_Comida extends Fragment {
 				R.id.btn_agregar_porcion);
 		_cbx_consumir_todo = (CheckBox) getView().findViewById(
 				R.id.cbox_registrar_todo);
+		//_cbx_consumir_todo.setChecked(checked);
 		_btn_registrar_comida = (Button) getView().findViewById(
 				R.id.btn_registrar_comida);
 
@@ -125,7 +129,10 @@ public class Fragmento_Detalles_Comida extends Fragment {
 	/********************************************************************************************* evento registrar */
 
 	private void evento_btn_registrar_comida() {
-
+		if(!hay_conexion()){			
+			Herramientas.mostrar_mensaje("No hay conexion intentelo mas tarde", this.getActivity());
+			return;
+		}
 		new Async_Registrar_Comida().execute(_comida);
 
 	}
@@ -144,6 +151,11 @@ public class Fragmento_Detalles_Comida extends Fragment {
 	/***************************************************************************************** Evento nuevo ali */
 	private void evento_btn_nuevo_alimento() {
 
+		if(!hay_conexion()){			
+			Herramientas.mostrar_mensaje("No hay conexion intentelo mas tarde", this.getActivity());
+			return;
+		}
+		
 		final Dialog custom;
 		final TextView cantida, comentario;
 		final Spinner nombre;
@@ -158,7 +170,7 @@ public class Fragmento_Detalles_Comida extends Fragment {
 		comentario = (TextView) custom.findViewById(R.id.txt_comentario);
 		btn_guardar = (Button) custom.findViewById(R.id.btn_guardar);
 		btn_cancelar = (Button) custom.findViewById(R.id.btn_cancelar);
-		custom.setTitle("Nueva Porción");
+		custom.setTitle("Nueva Porcion");
 
 		// *******************************/
 
@@ -203,6 +215,25 @@ public class Fragmento_Detalles_Comida extends Fragment {
 
 	}
 
+	
+	public boolean hay_conexion() {
+		ConnectivityManager cm = (ConnectivityManager) this.getActivity()
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+			return true;
+		}
+
+		return false;
+	}
+	/*******************************************************************************************
+	 * 
+	 * @author Cristian
+	 *	Tareas Asincronas
+	 ***********************************************************************************************/
+	
 	class Async_Registrar_Comida extends AsyncTask<Comida, Integer, Boolean> {
 
 		protected void onPreExecute() {

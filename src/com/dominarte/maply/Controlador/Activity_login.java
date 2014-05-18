@@ -126,11 +126,12 @@ public class Activity_login extends Activity {
 		return false;
 	}
 
-	/**
-	 * *************************************************************************
-	 * ******************** Tareaa Asincronica para validar credenciales de
-	 * usuario
-	 */
+	/*******************************************************************************************
+	 * 
+	 * @author Cristian
+	 *	Tareas Asincronas
+	 ***********************************************************************************************/
+	
 	class Asynclogin extends AsyncTask<String, String, String> {
 
 		protected void onPreExecute() {

@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -51,6 +54,10 @@ public class Fragmento_Lista_Tipos_Comidas extends Fragment {
 	}
 
 	public void cargar_dietas() {
+		if(!hay_conexion()){			
+			Herramientas.mostrar_mensaje("No hay conexion intentelo mas tarde", this.getActivity());
+			return;
+		}
 		new Async_Cargar_Dietas().execute(""
 				+ Usuario.getInstance().getCod_usuario(), _ano + "-" + _mes
 				+ "-" + _dia);
@@ -82,6 +89,19 @@ public class Fragmento_Lista_Tipos_Comidas extends Fragment {
 
 	}
 
+	public boolean hay_conexion() {
+		ConnectivityManager cm = (ConnectivityManager) this.getActivity()
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public void actualizar_lista_dieta() {
 		Adaptador_dieta adaptador = new Adaptador_dieta(this.getActivity());
 		_lista_dieta.setAdapter(adaptador);
@@ -94,7 +114,14 @@ public class Fragmento_Lista_Tipos_Comidas extends Fragment {
 	public interface Comida_Listener {
 		void onCorreoSeleccionado(Comida comida);
 	}
-
+	
+	
+	/*******************************************************************************************
+	 * 
+	 * @author Cristian
+	 *	Tareas Asincronas
+	 ***********************************************************************************************/
+	
 	class Async_Cargar_Dietas extends AsyncTask<String, Integer, String> {
 
 		protected void onPreExecute() {

@@ -48,10 +48,9 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="342dp"
+        android:layout_width="282dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_weight="0.07"
         android:background="@color/Color_Principal"
         android:onClick="login"
         android:text="@string/texto_boton_login" />

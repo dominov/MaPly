@@ -11,8 +11,13 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int Color_Actual=0x7f040004;
         public static final int Color_Negro=0x7f040002;
+        public static final int Color_Pasado_CompletoNegro=0x7f040005;
+        public static final int Color_Pasado_incompleto=0x7f040007;
+        public static final int Color_Pasado_medio=0x7f040006;
         public static final int Color_Principal=0x7f040000;
+        public static final int Color_Proximo=0x7f040003;
         public static final int Color_Secun=0x7f040001;
     }
     public static final class dimen {
@@ -28,6 +33,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
         public static final int logo=0x7f020001;
         public static final int maply_logo=0x7f020002;
+        public static final int mini_logoo=0x7f020003;
     }
     public static final class id {
         public static final int FrgDetalle=0x7f09000f;

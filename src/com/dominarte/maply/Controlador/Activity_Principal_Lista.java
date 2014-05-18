@@ -39,7 +39,7 @@ public class Activity_Principal_Lista extends FragmentActivity {
 	private static final String TAG = "Activity_Principal_Lista";
 	TextView _txt_nombre_completo;
 	Button _btn_actualizar, _btn_salir, _btn_select_fecha;
-	private PendingIntent pendingIntent;
+	//private PendingIntent pendingIntent;
 
 	static final int DIALOGO_SELECCIONAR_FECHA = 0;
 
@@ -62,6 +62,13 @@ public class Activity_Principal_Lista extends FragmentActivity {
 		// crearAlarmas();
 		Log.i(TAG, "crearAlarma");
 
+	}
+	
+	protected void onResume(){
+	super.onResume();
+		((Fragmento_Lista_Tipos_Comidas) getSupportFragmentManager()
+				.findFragmentById(R.id.FrgListado)).actualizar_lista_dieta();
+	
 	}
 
 	/*
@@ -86,7 +93,7 @@ public class Activity_Principal_Lista extends FragmentActivity {
 	 * } }
 	 */
 
-	private HashMap<String, String> _daotos_login;
+
 
 	private void guardar_preferncias() {
 
@@ -205,8 +212,7 @@ public class Activity_Principal_Lista extends FragmentActivity {
 
 		((Fragmento_Lista_Tipos_Comidas) getSupportFragmentManager()
 				.findFragmentById(R.id.FrgListado)).cargar_dietas();
-		
-		
+
 
 	}
 

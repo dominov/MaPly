@@ -53,7 +53,7 @@ public class Dao_dieta extends Dao_general implements Dao {
 				comida.getFecha(), comida.get_tipo_numero());
 
 		for (int i = 0; i < comida.size(); i++) {
-			if (comida.get(i).isEstado()) {
+			if (comida.get(i).es_consumida()) {
 				comida_a_registrar.add(comida.get(i));
 			}
 
@@ -87,10 +87,12 @@ public class Dao_dieta extends Dao_general implements Dao {
 					dato.put("tipo_comida",
 							comida_a_registrar.get_tipo_numero());
 
+					Date  fecha = new Date();
+					
 					SimpleDateFormat formatoDeFecha = new SimpleDateFormat(
 							"yyyy-MM-dd");
 					dato.put("fecha_registro", formatoDeFecha
-							.format(comida_a_registrar.getFecha()));
+							.format(fecha));
 
 					arry_datos.put(dato);
 				} /**/
@@ -99,9 +101,9 @@ public class Dao_dieta extends Dao_general implements Dao {
 				post.setEntity(entity);
 
 				HttpResponse resp = httpClient.execute(post);
-				// String respStr = EntityUtils.toString(resp.getEntity());
+				String respStr = EntityUtils.toString(resp.getEntity());
 
-				// Log.i(TAG, "esta es a respúesta:" + respStr);
+				 Log.i(TAG, "esta es a respueta de Insert :" + respStr);
 
 				pD.setProgress(+20);
 
@@ -147,7 +149,7 @@ public class Dao_dieta extends Dao_general implements Dao {
 				JSONObject dato = new JSONObject();
 
 				dato.put("codigo_dieta", comida.get(i).getCod_dieta());
-				dato.put("estado", comida.get(i).getEstado());
+				dato.put("estado", comida.get(i).es_consumida());
 
 				arry_datos.put(dato);
 			}
@@ -159,7 +161,7 @@ public class Dao_dieta extends Dao_general implements Dao {
 			HttpResponse resp = httpClient.execute(post);
 			String respStr = EntityUtils.toString(resp.getEntity());
 
-			Log.i(TAG + "222", "esta es a respúesta:" + respStr);
+			//Log.i(TAG + "222", "esta es a respuesta:" + respStr);
 
 			pD.setProgress(+20);
 

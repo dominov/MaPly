@@ -116,7 +116,7 @@ public class Adaptador_expandible_porciones extends BaseExpandableListAdapter {
 
 		CheckBox cbx_porcion_consumida = (CheckBox) convertView
 				.findViewById(R.id.cbx_porcion_consumida);
-		cbx_porcion_consumida.setChecked(padre.isEstado());
+		cbx_porcion_consumida.setChecked(padre.es_consumida());
 
 		cbx_porcion_consumida
 				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

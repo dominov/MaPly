@@ -11,7 +11,7 @@ public class Dieta {
 	Alimento alimento;
 	double cantidad;
 	String comentario;
-	int estado;
+	int _consumida;
 
 	public Dieta(int cod_dieta, int tipo_comida, Alimento alimento,
 			double cantidad, String comentario, int esta) {
@@ -21,7 +21,7 @@ public class Dieta {
 		this.alimento = alimento;
 		this.cantidad = cantidad;
 		this.comentario = comentario;
-		this.estado = esta;
+		this._consumida = esta;
 	}
 
 	public int getCod_dieta() {
@@ -32,9 +32,9 @@ public class Dieta {
 		this.cod_dieta = cod_dieta;
 	}
 
-	public boolean isEstado() {
+	public boolean es_consumida() {
 
-		if (estado == 1)
+		if (_consumida == 1)
 			return true;
 		return false;
 
@@ -42,21 +42,23 @@ public class Dieta {
 
 	public void setEstado(boolean estado) {
 		if (estado) {
-			this.estado = 1;
+			this._consumida = 1;
 		} else {
 
-			this.estado = 0;
+			this._consumida = 0;
 		}
 
 		;
 	}
 
-	public int getEstado() {
-		return estado;
+
+
+	public int get_consumida() {
+		return _consumida;
 	}
 
-	public void setEstado(int estado) {
-		this.estado = estado;
+	public void set_consumida(int _consumida) {
+		this._consumida = _consumida;
 	}
 
 	public int getTipo_comida() {
