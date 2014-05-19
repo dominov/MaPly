@@ -80,8 +80,6 @@ public class Adaptador_dieta extends ArrayAdapter {
 		int hora_comida = Integer.parseInt(simpleDateFormat.format(comida
 				.getFecha()));
 
-		Log.i(TAG, "hoar actual: " + hora_actual);
-		Log.i(TAG, "hoar comidaa: " + hora_comida);
 
 		if (hora_actual < hora_comida
 				&& date.getTime() < comida.getFecha().getTime()) {

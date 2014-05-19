@@ -1,6 +1,7 @@
 package com.dominarte.maply.Modelo.Dao;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.http.HttpResponse;
@@ -276,7 +277,7 @@ public class Dao_dieta extends Dao_general implements Dao {
 
 							pD.setProgress(+progreso);
 						}
-						ordenar_comidas();
+					
 						return "ok";
 					}
 				} catch (Exception e) {
@@ -298,10 +299,6 @@ public class Dao_dieta extends Dao_general implements Dao {
 		return null;
 	}
 
-	private void ordenar_comidas() {
-
-		// Usuario.getInstance().getList_comida().
-	}
 
 	private void anadir_dieta_comida(Dieta d, String nombre, Date fecha) {
 

@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.dominarte.maply.Herramientas;
 import com.dominarte.maply.R;
+import com.dominarte.maply.Alarma.Gestor_Alarmas;
 import com.dominarte.maply.Controlador.Fragmento_Detalles_Comida.Async_Buscar_Alimento;
 import com.dominarte.maply.Controlador.Fragmento_Lista_Tipos_Comidas.Async_Cargar_Dietas;
 import com.dominarte.maply.Modelo.Comida;
@@ -39,7 +40,7 @@ public class Activity_Principal_Lista extends FragmentActivity {
 	private static final String TAG = "Activity_Principal_Lista";
 	TextView _txt_nombre_completo;
 	Button _btn_actualizar, _btn_salir, _btn_select_fecha;
-	//private PendingIntent pendingIntent;
+	 private PendingIntent pendingIntent;
 
 	static final int DIALOGO_SELECCIONAR_FECHA = 0;
 
@@ -59,41 +60,24 @@ public class Activity_Principal_Lista extends FragmentActivity {
 		inicio();
 		guardar_preferncias();
 
-		// crearAlarmas();
+
 		Log.i(TAG, "crearAlarma");
 
 	}
-	
-	protected void onResume(){
-	super.onResume();
+
+	protected void onResume() {
+		super.onResume();
 		((Fragmento_Lista_Tipos_Comidas) getSupportFragmentManager()
 				.findFragmentById(R.id.FrgListado)).actualizar_lista_dieta();
-	
+
 	}
+	/****************************************************/
 
-	/*
-	 * private void crearAlarmas() { Log.i(TAG, "crearAlarma");
-	 * 
-	 * Intent myIntent = new Intent(this, Servicio_Alarma.class); pendingIntent
-	 * = PendingIntent.getService(this, 0, myIntent, 0);
-	 * 
-	 * AlarmManager alarmManager = (AlarmManager)
-	 * getSystemService(ALARM_SERVICE);
-	 * 
-	 * Calendar calendar = Calendar.getInstance();
-	 * calendar.setTimeInMillis(System.currentTimeMillis());
-	 * calendar.add(Calendar.HOUR_OF_DAY, 22); calendar.add(Calendar.MINUTE,
-	 * 14); calendar.add(Calendar.SECOND, 0);
-	 * 
-	 * alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-	 * pendingIntent);
-	 * 
-	 * for (int i = 0; i < Usuario.getInstance().getList_comida().size(); i++) {
-	 * 
-	 * } }
-	 */
-
-
+	protected void onStart(){
+		super.onStart();
+		
+		Gestor_Alarmas.crear_alarma(this);
+	}
 
 	private void guardar_preferncias() {
 
@@ -146,11 +130,11 @@ public class Activity_Principal_Lista extends FragmentActivity {
 		simpleDateFormat = new SimpleDateFormat("MM");
 		Fragmento_Lista_Tipos_Comidas._mes = Integer.parseInt(simpleDateFormat
 				.format(date));
-		
+
 		simpleDateFormat = new SimpleDateFormat("dd");
 		Fragmento_Lista_Tipos_Comidas._dia = Integer.parseInt(simpleDateFormat
 				.format(date));
-		
+
 		_btn_select_fecha.setText(Fragmento_Lista_Tipos_Comidas._ano + "-"
 				+ Fragmento_Lista_Tipos_Comidas._mes + "-"
 				+ Fragmento_Lista_Tipos_Comidas._dia);
@@ -213,7 +197,6 @@ public class Activity_Principal_Lista extends FragmentActivity {
 		((Fragmento_Lista_Tipos_Comidas) getSupportFragmentManager()
 				.findFragmentById(R.id.FrgListado)).cargar_dietas();
 
-
 	}
 
 	protected Dialog onCreateDialog(int id) {
@@ -227,11 +210,12 @@ public class Activity_Principal_Lista extends FragmentActivity {
 					Fragmento_Lista_Tipos_Comidas._ano = year;
 					Fragmento_Lista_Tipos_Comidas._mes = monthOfYear;
 					Fragmento_Lista_Tipos_Comidas._dia = dayOfMonth;
-					_btn_select_fecha.setText(Fragmento_Lista_Tipos_Comidas._ano + "-"
-							+ Fragmento_Lista_Tipos_Comidas._mes + "-"
-							+ Fragmento_Lista_Tipos_Comidas._dia);
+					_btn_select_fecha
+							.setText(Fragmento_Lista_Tipos_Comidas._ano + "-"
+									+ Fragmento_Lista_Tipos_Comidas._mes + "-"
+									+ Fragmento_Lista_Tipos_Comidas._dia);
 					evento_btn_actalizar();
-					
+
 				}
 			};
 
