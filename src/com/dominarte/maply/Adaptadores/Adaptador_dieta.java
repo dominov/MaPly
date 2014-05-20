@@ -44,7 +44,7 @@ public class Adaptador_dieta extends ArrayAdapter {
 				.getInstance().getList_comida());
 		this._contexto = context;
 		_comdidalc = Usuario.getInstance().getList_comida();
-
+		
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {

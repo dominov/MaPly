@@ -20,7 +20,7 @@ import com.dominarte.maply.Modelo.Usuario;
 import com.dominarte.maply.Modelo.Dao.Dao_alimento;
 import com.dominarte.maply.Modelo.Dao.Dao_usuario;
 
-public class Activity_login extends Activity {
+public class Actividad_login extends Activity {
 
 	private static final int PERIOD = 2000;
 	private long lastPressedTime;
@@ -58,7 +58,7 @@ public class Activity_login extends Activity {
 		usuario = (EditText) findViewById(R.id.etUsuario);
 		password = (EditText) findViewById(R.id.etPassword);
 
-		pDialog = new ProgressDialog(Activity_login.this);
+		pDialog = new ProgressDialog(Actividad_login.this);
 		pDialog.setMessage("Autenticando....");
 		pDialog.setIndeterminate(false);
 		pDialog.setCancelable(false);
@@ -91,7 +91,7 @@ public class Activity_login extends Activity {
 
 	public void llamar_activity_principal() {
 
-		Intent intent = new Intent(this, Activity_Principal_Lista.class);
+		Intent intent = new Intent(this, Actividad_Principal_Lista.class);
 		startActivity(intent);
 		finish();
 	}

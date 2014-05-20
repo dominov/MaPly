@@ -34,7 +34,7 @@ import com.dominarte.maply.Controlador.Fragmento_Lista_Tipos_Comidas.Async_Carga
 import com.dominarte.maply.Modelo.Comida;
 import com.dominarte.maply.Modelo.Usuario;
 
-public class Activity_Principal_Lista extends FragmentActivity {
+public class Actividad_Principal_Lista extends FragmentActivity {
 
 	private static final int PERIOD = 2000;
 	private static final String TAG = "Activity_Principal_Lista";
@@ -58,11 +58,9 @@ public class Activity_Principal_Lista extends FragmentActivity {
 		setContentView(R.layout.vista_activity_principal_lista);
 
 		inicio();
-		guardar_preferncias();
+		guardar_preferncias();	
 
-
-		Log.i(TAG, "crearAlarma");
-
+		
 	}
 
 	protected void onResume() {
@@ -73,11 +71,7 @@ public class Activity_Principal_Lista extends FragmentActivity {
 	}
 	/****************************************************/
 
-	protected void onStart(){
-		super.onStart();
-		
-		Gestor_Alarmas.crear_alarma(this);
-	}
+
 
 	private void guardar_preferncias() {
 
@@ -102,7 +96,7 @@ public class Activity_Principal_Lista extends FragmentActivity {
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putInt("codigo_usuario", -1);
 		editor.commit();
-		Intent intent = new Intent(this, Activity_login.class);
+		Intent intent = new Intent(this, Actividad_login.class);
 		startActivity(intent);
 		finish();
 	}
@@ -184,7 +178,7 @@ public class Activity_Principal_Lista extends FragmentActivity {
 			((Fragmento_Detalles_Comida) getSupportFragmentManager()
 					.findFragmentById(R.id.FrgDetalle)).mostrarDetalle(comida);
 		} else {
-			Intent i = new Intent(this, Activity_Principal_detalles.class);
+			Intent i = new Intent(this, Actividad_Principal_detalles.class);
 			i.putExtra("codigo_tipo_comida", comida.get_tipo_numero());
 			// i.putExtra(Activity_Principal_detalles.EXTRA_TEXTO,
 			// comida.get_tipo());

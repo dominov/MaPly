@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dominarte.maply"
     android:configChanges="orientation|keyboardHidden"
-    android:screenOrientation="portrait"
-    >
+    android:screenOrientation="portrait" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -13,12 +12,12 @@
         android:allowBackup="true"
         android:icon="@drawable/mini_logoo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
-           android:name="com.dominarte.maply.Controlador.Activity_login"
-            android:label="@string/app_name"
+            android:name="com.dominarte.maply.Controlador.Actividad_login"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,24 +25,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.dominarte.maply.Controlador.Activity_Principal_Lista"
+            android:name="com.dominarte.maply.Controlador.Actividad_Principal_Lista"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_dieta"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.dominarte.maply.Controlador.Activity_Principal_detalles"
-            android:label="@string/title_activity_principal_detalles"
+            android:name="com.dominarte.maply.Controlador.Actividad_Principal_detalles"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"/>
+            android:label="@string/title_activity_principal_detalles"
+            android:screenOrientation="portrait" />
 
+        <service
+            android:name="com.dominarte.maply.Alarma.MyAlarmService"
+            android:enabled="true" />
 
-        <service android:name=".Controlador.Servicio_Alarma" />
+        <receiver android:name="com.dominarte.maply.Alarma.MyReceiver" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-
 
 </manifest>

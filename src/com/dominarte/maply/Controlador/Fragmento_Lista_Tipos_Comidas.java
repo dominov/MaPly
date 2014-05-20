@@ -20,6 +20,7 @@ import android.widget.ListView;
 import com.dominarte.maply.Herramientas;
 import com.dominarte.maply.R;
 import com.dominarte.maply.Adaptadores.Adaptador_dieta;
+import com.dominarte.maply.Alarma.Gestor_Alarmas;
 import com.dominarte.maply.Modelo.Comida;
 import com.dominarte.maply.Modelo.Usuario;
 import com.dominarte.maply.Modelo.Dao.Dao_dieta;
@@ -32,7 +33,7 @@ public class Fragmento_Lista_Tipos_Comidas extends Fragment {
 	private ListView _lista_dieta;
 	private Comida_Listener _listener;
 	private ProgressDialog _pDialog;
-
+	private boolean ya_hay_alarma = false;
 	public static int _ano, _mes, _dia;
 
 	@Override
@@ -50,7 +51,7 @@ public class Fragmento_Lista_Tipos_Comidas extends Fragment {
 		super.onActivityCreated(state);
 		inicio();
 		cargar_dietas();
-
+		
 	}
 
 	public void cargar_dietas() {
@@ -103,9 +104,20 @@ public class Fragmento_Lista_Tipos_Comidas extends Fragment {
 	}
 
 	public void actualizar_lista_dieta() {
+
+		
 		Adaptador_dieta adaptador = new Adaptador_dieta(this.getActivity());
 		_lista_dieta.setAdapter(adaptador);
+		
+		if (!ya_hay_alarma) {
+			Gestor_Alarmas.crear_alarma(this.getActivity());
+			ya_hay_alarma = true;
+		}
+		
+	
 	}
+
+
 
 	public void setComidas_Listener(Comida_Listener listener) {
 		this._listener = listener;
@@ -153,7 +165,7 @@ public class Fragmento_Lista_Tipos_Comidas extends Fragment {
 		protected void onPostExecute(String result) {
 			_pDialog.setProgress(100);
 			_pDialog.dismiss();// ocultamos progess vista_dialog_nuevo_alimento.
-
+			
 			actualizar_lista_dieta();
 
 			Herramientas.mostrar_mensaje(result, getActivity());

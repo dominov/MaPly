@@ -273,6 +273,8 @@ public class Dao_dieta extends Dao_general implements Dao {
 
 							Date fe = formatoDeFecha.parse(fecha);
 							fe.setHours(Integer.parseInt(hora_tipo_comida));
+							fe.setMinutes(0);
+							fe.setSeconds(0);
 							anadir_dieta_comida(d, nombre_tipo_comida, fe);
 
 							pD.setProgress(+progreso);

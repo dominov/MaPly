@@ -9,7 +9,7 @@ import com.dominarte.maply.Modelo.Usuario;
 /**
  * Created by Cristian on 19/04/14.
  */
-public class Activity_Principal_detalles extends FragmentActivity {
+public class Actividad_Principal_detalles extends FragmentActivity {
 
 	
 
