@@ -5,7 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="texto_boton_login">Iniciar sesión</string>
-    <string name="title_activity_dieta">Dieta</string>
+    <string name="title_activity_dieta">Lista Dietas</string>
     <string name="title_activity_principal_detalles">Detalles</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>

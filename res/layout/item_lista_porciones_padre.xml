@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:weightSum="1">
-
+    android:weightSum="1"
+      android:padding="7dp" >
 
     <TextView
         android:id="@+id/lblListHeader"
@@ -16,6 +16,7 @@
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textColor="@color/Color_Principal"
         android:textSize="25dp" />
+
     <TextView
         android:id="@+id/lbl_cantidad"
         android:layout_width="wrap_content"

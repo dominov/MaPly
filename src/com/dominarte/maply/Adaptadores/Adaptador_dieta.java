@@ -57,7 +57,7 @@ public class Adaptador_dieta extends ArrayAdapter {
 
 			titular = new Titular();
 			titular.titulo = (TextView) item.findViewById(R.id.tvTipo);
-			titular.porciones = (TextView) item.findViewById(R.id.tv_resumen);
+			titular.hora = (TextView) item.findViewById(R.id.tv_hora);
 
 			item.setTag(titular);
 		} else {
@@ -65,7 +65,13 @@ public class Adaptador_dieta extends ArrayAdapter {
 		}
 
 		titular.titulo.setText(_comdidalc.get(position).get_tipo());
-		titular.porciones.setText(_comdidalc.get(position).getFecha().getHours() + ":00");
+		int hora = _comdidalc.get(position).getFecha().getHours();
+		if (hora <10) {
+			titular.hora.setText( "0"+hora+ ":00");
+		}else {
+			titular.hora.setText( hora+ ":00");	
+		}
+		
 
 		titular.colorear(ver_estado(_comdidalc.get(position)));
 		return (item);
@@ -116,32 +122,32 @@ public class Adaptador_dieta extends ArrayAdapter {
 
 	class Titular {
 		TextView titulo;
-		TextView porciones;
+		TextView hora;
 
 	
 		public void colorear(int i) {
 
 			switch (i) {
 			case PROXIMO:
-				titulo.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Proximo));
-				porciones.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Proximo));
+				//titulo.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Proximo));
+				hora.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Proximo));
 				break;
 			case ACTUAL:
-				titulo.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Actual));
-				porciones.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Actual));
+				//titulo.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Actual));
+				hora.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Actual));
 				break;
 			case PASADO_COMPLETO:
-				titulo.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Pasado_CompletoNegro));
-				porciones
+				//titulo.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Pasado_CompletoNegro));
+				hora
 						.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Pasado_CompletoNegro));
 				break;
 			case PASODO_MEDIO_COMPLETO:
-				titulo.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Pasado_medio));
-				porciones.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Pasado_medio));
+				//titulo.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Pasado_medio));
+				hora.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Pasado_medio));
 				break;
 			case PASODO_INCOMPLETO:
-				titulo.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Pasado_incompleto));
-				porciones.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Pasado_incompleto));
+				//titulo.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Pasado_incompleto));
+				hora.setBackgroundColor(_contexto.getResources().getColor(R.color.Color_Pasado_incompleto));
 				break;
 			default:
 				break;

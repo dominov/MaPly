@@ -11,6 +11,7 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.ClipData.Item;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -39,7 +42,8 @@ public class Actividad_Principal_Lista extends FragmentActivity {
 	private static final int PERIOD = 2000;
 	private static final String TAG = "Activity_Principal_Lista";
 	TextView _txt_nombre_completo;
-	Button _btn_actualizar, _btn_salir, _btn_select_fecha;
+	
+	MenuItem item_fecha;
 	 private PendingIntent pendingIntent;
 
 	static final int DIALOGO_SELECCIONAR_FECHA = 0;
@@ -64,11 +68,43 @@ public class Actividad_Principal_Lista extends FragmentActivity {
 	}
 
 	protected void onResume() {
+
 		super.onResume();
 		((Fragmento_Lista_Tipos_Comidas) getSupportFragmentManager()
 				.findFragmentById(R.id.FrgListado)).actualizar_lista_dieta();
 
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_actividad_principal_lista, menu);
+		item_fecha = menu.findItem(R.id.menu_fecha);
+		item_fecha.setTitle(Fragmento_Lista_Tipos_Comidas._ano + "-"
+				+ Fragmento_Lista_Tipos_Comidas._mes + "-"
+				+ Fragmento_Lista_Tipos_Comidas._dia);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+	        case R.id.menu_actualizar:
+	            evento_btn_actalizar();
+	            return true;
+	        case R.id.menu_fecha:
+	        	showDialog(DIALOGO_SELECCIONAR_FECHA);
+	            return true;
+	        case R.id.menu_salir:
+	           event_btn_logout();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	
+	
 	/****************************************************/
 
 
@@ -101,6 +137,12 @@ public class Actividad_Principal_Lista extends FragmentActivity {
 		finish();
 	}
 
+	private void evento_btn_actalizar() {
+
+		((Fragmento_Lista_Tipos_Comidas) getSupportFragmentManager()
+				.findFragmentById(R.id.FrgListado)).cargar_dietas();
+
+	}
 	/**
 	 * ***************************Para cuando pulse atras 2 veces se salga de la
 	 * APP**************
@@ -108,13 +150,6 @@ public class Actividad_Principal_Lista extends FragmentActivity {
 
 	private void inicio() {
 
-		_btn_select_fecha = (Button) findViewById(R.id.btn_seleccionar_fecha);
-		_btn_select_fecha.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showDialog(DIALOGO_SELECCIONAR_FECHA);
-			}
-		});
 
 		Date date = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
@@ -129,9 +164,6 @@ public class Actividad_Principal_Lista extends FragmentActivity {
 		Fragmento_Lista_Tipos_Comidas._dia = Integer.parseInt(simpleDateFormat
 				.format(date));
 
-		_btn_select_fecha.setText(Fragmento_Lista_Tipos_Comidas._ano + "-"
-				+ Fragmento_Lista_Tipos_Comidas._mes + "-"
-				+ Fragmento_Lista_Tipos_Comidas._dia);
 
 		Fragmento_Lista_Tipos_Comidas frgListado;
 
@@ -146,21 +178,8 @@ public class Actividad_Principal_Lista extends FragmentActivity {
 					}
 				});
 
-		_btn_actualizar = (Button) findViewById(R.id.btn_actualizar);
-		_btn_actualizar.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				evento_btn_actalizar();
-			}
-		});
 
-		_btn_salir = (Button) findViewById(R.id.btn_logout);
-		_btn_salir.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				event_btn_logout();
-			}
-		});
+
 
 		_txt_nombre_completo = (TextView) findViewById(R.id.txt_nombre_completo);
 		_txt_nombre_completo
@@ -186,12 +205,6 @@ public class Actividad_Principal_Lista extends FragmentActivity {
 		}
 	}
 
-	private void evento_btn_actalizar() {
-
-		((Fragmento_Lista_Tipos_Comidas) getSupportFragmentManager()
-				.findFragmentById(R.id.FrgListado)).cargar_dietas();
-
-	}
 
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
@@ -204,8 +217,8 @@ public class Actividad_Principal_Lista extends FragmentActivity {
 					Fragmento_Lista_Tipos_Comidas._ano = year;
 					Fragmento_Lista_Tipos_Comidas._mes = monthOfYear;
 					Fragmento_Lista_Tipos_Comidas._dia = dayOfMonth;
-					_btn_select_fecha
-							.setText(Fragmento_Lista_Tipos_Comidas._ano + "-"
+					
+					item_fecha.setTitle(Fragmento_Lista_Tipos_Comidas._ano + "-"
 									+ Fragmento_Lista_Tipos_Comidas._mes + "-"
 									+ Fragmento_Lista_Tipos_Comidas._dia);
 					evento_btn_actalizar();
