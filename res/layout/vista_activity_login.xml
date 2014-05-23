@@ -55,15 +55,4 @@
         android:onClick="login"
         android:text="@string/texto_boton_login" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_weight="0.07"
-        android:text="@string/olvido_contrasena"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/Color_Negro" />
-
 </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="1"
@@ -11,34 +11,38 @@
         android:id="@+id/lblListHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:background="@color/Color_Negro"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textColor="@color/Color_Principal"
-        android:textSize="25dp" />
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/lbl_cantidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="0.7"
         android:background="@color/Color_Secun"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textColor="@color/Color_Negro"
-        android:textSize="25dp" />
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/lbl_medida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:background="@color/Color_Secun"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textColor="@color/Color_Negro"
-        android:textSize="25dp" />
+        android:textSize="20dp" />
 
     <CheckBox
         android:id="@+id/cbx_porcion_consumida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5px"
+        android:layout_weight="1"
         android:button="@drawable/vista_checkbox"
         android:focusable="false"
         android:freezesText="false" />

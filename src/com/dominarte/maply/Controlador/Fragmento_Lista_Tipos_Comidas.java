@@ -82,7 +82,7 @@ public class Fragmento_Lista_Tipos_Comidas extends Fragment {
 				});
 
 		_pDialog = new ProgressDialog(this.getActivity());
-		_pDialog.setMessage("Cargargando dietas....");
+		_pDialog.setMessage("Cargando dietas....");
 		_pDialog.setIndeterminate(false);
 		_pDialog.setCancelable(false);
 		_pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
