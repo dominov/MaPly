@@ -288,12 +288,12 @@ public class Dao_dieta extends Dao_general implements Dao {
 				}
 			} else {
 				Log.e(TAG, "Communication  JSon NUll");
-				return "listado de Dietas Vacio";
+				return "No hay Dietas para este Dia";
 			}
 			/*************************************/
 
 		}
-		return "listado de Dietas Vacio";
+		return "No hay Dietas para este Dia";
 	}
 
 	@Override
@@ -320,9 +320,9 @@ public class Dao_dieta extends Dao_general implements Dao {
 		c.add(d);
 		Usuario.getInstance().getList_comida().add(c);
 
-		SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
 
-		Log.i(TAG, "esta es la fech : " + formatoDeFecha.format(c.getFecha()));
+
+		
 
 	}
 

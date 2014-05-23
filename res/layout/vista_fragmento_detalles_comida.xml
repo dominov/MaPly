@@ -41,7 +41,9 @@
                android:layout_width="wrap_content"
                android:layout_height="match_parent"
                android:layout_gravity="right"
+               android:button="@drawable/vista_checkbox"
                android:textSize="40dp" />
+
        </LinearLayout>
 
        <TextView
@@ -71,7 +73,7 @@
         android:gravity="top|center_horizontal"
         android:orientation="horizontal"
         android:paddingTop="10dp"
-        android:layout_weight="3">
+        android:layout_weight="2">
 
         <ExpandableListView
             android:id="@+id/lst_exp_porciones"

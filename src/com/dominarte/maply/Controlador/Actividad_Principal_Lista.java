@@ -178,9 +178,6 @@ public class Actividad_Principal_Lista extends FragmentActivity {
 					}
 				});
 
-
-
-
 		_txt_nombre_completo = (TextView) findViewById(R.id.txt_nombre_completo);
 		_txt_nombre_completo
 				.setText(Usuario.getInstance().getNombre_Completo());
@@ -215,7 +212,7 @@ public class Actividad_Principal_Lista extends FragmentActivity {
 				public void onDateSet(DatePicker view, int year,
 						int monthOfYear, int dayOfMonth) {
 					Fragmento_Lista_Tipos_Comidas._ano = year;
-					Fragmento_Lista_Tipos_Comidas._mes = monthOfYear;
+					Fragmento_Lista_Tipos_Comidas._mes = monthOfYear + 1;
 					Fragmento_Lista_Tipos_Comidas._dia = dayOfMonth;
 					
 					item_fecha.setTitle(Fragmento_Lista_Tipos_Comidas._ano + "-"
@@ -228,7 +225,7 @@ public class Actividad_Principal_Lista extends FragmentActivity {
 
 			return new DatePickerDialog(this, onDateSetListener,
 					Fragmento_Lista_Tipos_Comidas._ano,
-					Fragmento_Lista_Tipos_Comidas._mes,
+					Fragmento_Lista_Tipos_Comidas._mes-1,
 					Fragmento_Lista_Tipos_Comidas._dia);
 		}
 		return null;
